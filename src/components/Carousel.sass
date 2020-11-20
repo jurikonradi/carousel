@@ -6,14 +6,16 @@
 
 .outer-container
     width: 100vw
-    height: 100vh
+    height: auto
+    // border: 2px grey solid
 
 .carousel
     margin: 0 auto
-    width: 100% //mobile
-    height: 100% // mobile
     overflow: hidden
     position: relative
+    // prevent vertical touch:
+    -ms-touch-action: pan-x
+    touch-action: pan-x   
     // border: 3px solid red
 
 .chevrons
@@ -30,6 +32,16 @@
     // align-items: stretch
     // align-content: center
 
+// Mobile
+@media screen and (orientation: portrait)
+    .carousel
+        width: 100vw
+        height: 100vw
+@media screen and (orientation: landscape)
+    .carousel
+        width: 100vh
+        height: 100vh
+        
 // Tablet+
 @media (min-width: $breakpoint-tablet)
     .carousel
