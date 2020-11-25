@@ -1,3 +1,5 @@
+// Written by Jurijs Konradi 2020
+
 import React, { useState } from "react";
 import "./Carousel.sass";
 import AllElements from "./AllElements";
@@ -6,6 +8,7 @@ import ChevronLeft from "./ChevronLeft";
 import settings from "./../settings/settings.js";
 import imageSources from "./../settings/ImagesForCarousel";
 import DotsNavigation from "./DotsNavigation";
+import DotsNavigationMobile from "./DotsNavigationMobile";
 
 let numberOfElements = imageSources.length;
 let startX = 0;
@@ -30,7 +33,7 @@ isTouchScreen
 function Carousel() {
   const [moveValue, setMoveValue] = useState(0);
 
-  let [mobileConsole, setMobileConsole] = useState("");
+  // let [mobileConsole, setMobileConsole] = useState(""); // for debugging
 
   const swipeTimer = () => {
     swipeTime += 200;
@@ -51,15 +54,20 @@ function Carousel() {
   const moveElementLeft = () => {
     setMoveValue(moveValue - elementWidth);
     elementIndex++;
-    setMobileConsole((mobileConsole += ", move: " + moveValue));
+    // setMobileConsole((mobileConsole += ", move: " + moveValue));
   };
   const moveElementRight = () => {
     setMoveValue(moveValue + elementWidth);
     elementIndex--;
-    setMobileConsole((mobileConsole += ", move: " + moveValue));
+    // setMobileConsole((mobileConsole += ", move: " + moveValue));
+  };
+  const goToElement = (number) => {
+    setMoveValue(number * elementWidth * -1);
+    elementIndex = number;
+    // console.log("goToElement: ", number);
   };
 
-  // Touch screens, swiped:
+  // Touch-screens, swiped:
   const onSwipeStart = (e) => {
     e.preventDefault();
     swipeTime = 0;
@@ -133,59 +141,41 @@ function Carousel() {
           moveDuration={moveDuration}
           imageSources={imageSources}
         />
-        {/* show chewrons only on desktop: */}
-        {!isTouchScreen ? (
-          <div className="chevrons">
-            {moveValue >= 0 ? (
-              <div></div>
-            ) : (
-              <ChevronLeft moveFunction={moveElementRight} />
-            )}
+        {isTouchScreen ? (
+          <DotsNavigationMobile
+            activeDot={elementIndex}
+            numberOfDots={numberOfElements}
+          />
+        ) : (
+          <DotsNavigation
+            activeDot={elementIndex}
+            numberOfDots={numberOfElements}
+            goToElement={goToElement}
+          />
+        )}
 
-            {moveValue <= (numberOfElements - 1) * elementWidth * -1 ? (
-              <div></div>
-            ) : (
-              <ChevronRight moveFunction={moveElementLeft} />
-            )}
-          </div>
+        {/* show right chewron only on desktop: */}
+        {!isTouchScreen &&
+        moveValue >= (numberOfElements - 2) * elementWidth * -1 ? (
+          <ChevronRight moveFunction={moveElementLeft} />
         ) : (
           <div></div>
         )}
-        <DotsNavigation
-          activeDot={elementIndex}
-          numberOfDots={numberOfElements}
-        />
+
+        {/* show left chewron only on desktop: */}
+        {!isTouchScreen && moveValue < 0 ? (
+          <ChevronLeft moveFunction={moveElementRight} />
+        ) : (
+          <div></div>
+        )}
       </div>
       <p>
         isTouchScreen: {isTouchScreen.toString()}, elementWidth: {elementWidth}
       </p>
-      <p>{mobileConsole}</p>
+      {/* <p>{mobileConsole}</p> */}
       {/* <p>{mobileConsole}, i(r): {elementIndex}, m(r): {moveValue}</p> */}
     </div>
   );
 }
 
 export default Carousel;
-
-// {/* show chewrons only on desktop: */}
-// {!isTouchScreen ? (
-//   <div className="chevrons">
-//     {moveValue >= 0 ? (
-//       <div></div>
-//     ) : (
-//       <ChevronLeft moveFunction={moveElementRight} />
-//     )}
-
-//     {moveValue <= (numberOfElements - 1) * elementWidth * -1 ? (
-//       <div></div>
-//     ) : (
-//       <ChevronRight moveFunction={moveElementLeft} />
-//     )}
-//   </div>
-// ) : (
-//   <div></div>
-// )}
-// <DotsNavigation
-//   activeDot={elementIndex}
-//   numberOfDots={numberOfElements}
-// />

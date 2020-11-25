@@ -10,7 +10,14 @@ function DotsNavigation(props) {
     if (i === props.activeDot) {
       activeDot = true;
     }
-    dotsItems.push(<DotPointer activeDot={activeDot} key={i} />);
+    dotsItems.push(
+      <DotPointer
+        activeDot={activeDot}
+        goToElement={props.goToElement}
+        number={i}
+        key={i}
+      />
+    );
     activeDot = false;
   }
 

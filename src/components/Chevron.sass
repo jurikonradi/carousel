@@ -1,17 +1,21 @@
-.chevron-button
+.chevron-button-left, .chevron-button-right
+    position: absolute
+    top: 45%
+    z-index: 10
+    display: flex
     cursor: pointer
     padding: 16px 8px
-    // position: absolute
-    // top: 280px
-    // left: 799px
     border: none
     background: none
 
+.chevron-button-left
+    left: 0
+
+.chevron-button-right
+    right: 0
+
 .chevron-button:focus
     outline: none // Chrome
-
-
-
 
 .chevron
     height: 30px
@@ -24,5 +28,3 @@
 
 .chvr-left
     background-position: -2px 0px
-
-

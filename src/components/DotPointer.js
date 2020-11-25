@@ -7,10 +7,13 @@ function DotPointer(props) {
     className += " dot-transparent";
   }
   return (
-    <button type='button' className="button-dot">
+    <button
+      onClick={() => props.goToElement(props.number)}
+      type="button"
+      className="button-dot"
+    >
       <div className={className}></div>
-    </button> 
-    // <div className={className}></div>
+    </button>
   );
 }
 
