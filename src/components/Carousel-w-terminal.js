@@ -1,3 +1,5 @@
+// This is copy of Carousel.js with added custom Terminal on mobile (setMobileConsole = state) and some variables displayed under carousel on mobile for testing)
+
 // Written by Jurijs Konradi 2020
 
 import React, { useState } from "react";
@@ -33,7 +35,7 @@ isTouchScreen
 function Carousel() {
   const [moveValue, setMoveValue] = useState(0);
 
-  // let [mobileConsole, setMobileConsole] = useState(""); // for debugging
+  let [mobileConsole, setMobileConsole] = useState(""); // for debugging
 
   const swipeTimer = () => {
     swipeTime += 200;
@@ -54,14 +56,17 @@ function Carousel() {
   const moveElementLeft = () => {
     setMoveValue(moveValue - elementWidth);
     elementIndex++;
+    // setMobileConsole((mobileConsole += ", move: " + moveValue));
   };
   const moveElementRight = () => {
     setMoveValue(moveValue + elementWidth);
     elementIndex--;
+    // setMobileConsole((mobileConsole += ", move: " + moveValue));
   };
   const goToElement = (number) => {
     setMoveValue(number * elementWidth * -1);
     elementIndex = number;
+    // console.log("goToElement: ", number);
   };
 
   // Touch-screens, swiped:
@@ -72,14 +77,30 @@ function Carousel() {
     startSwipeTimer();
     moveDuration = 0;
     startX = e.touches[0].clientX;
+    // setMobileConsole(
+    //   (mobileConsole +=
+    //     ", start: " +
+    //     startX +
+    //     ", i(s): " +
+    //     elementIndex +
+    //     ", m(s): " +
+    //     moveValue)
+    // );
   };
   const onSwipeMove = (e) => {
     e.preventDefault();
     deltaX = startX - e.touches[0].clientX;
     setMoveValue((deltaX + elementIndex * elementWidth) * -1);
+    // setMobileConsole(mobileConsole +=
+    //     ', indx(m): ' + elementIndex );
+    //     ', start: ' + startX +
+    //     ', m: ' + moveValue +
+    //     ', d: ' + deltaX);
   };
   const onSwipeEnd = () => {
+    // setMobileConsole((mobileConsole += ", d(end): " + deltaX));
     stopSwipeTimer();
+    setMobileConsole((mobileConsole += ", time: " + swipeTime));
     moveDuration = settings.moveDuration;
     deltaXAbsolute = Math.abs(deltaX);
     if (
@@ -99,6 +120,13 @@ function Carousel() {
       }
     }
     setMoveValue(elementIndex * elementWidth * -1);
+    // setMobileConsole(
+    //   (mobileConsole +=
+    //     ", deltaXAbs: " + deltaXAbsolute + ", deltaX: " + deltaX)
+    // );
+    // setMobileConsole(
+    //   (mobileConsole += ", m(e): " + moveValue + ", i(e): " + elementIndex)
+    // );
   };
 
   return (
@@ -151,6 +179,8 @@ function Carousel() {
       <p>
         isTouchScreen: {isTouchScreen.toString()}, elementWidth: {elementWidth}
       </p>
+      <p>{mobileConsole}</p>
+      {/* <p>{mobileConsole}, i(r): {elementIndex}, m(r): {moveValue}</p> */}
     </div>
   );
 }
