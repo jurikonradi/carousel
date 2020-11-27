@@ -20,6 +20,22 @@
 - Using environment setup automatizers (like create-react-app) is prohibited.
 - Submitting any code that is not written by you
 
+# How it works
+
+## Settings
+
+2 settings files are located in `/settings` folder:
+
+- `settings.sass`
+- `settings.js`
+
+They control:
+
+- width and
+- height of the carousel on Desktop
+- time for moveDuration (movement duration from one element to another on Desktop in seconds),
+- time for longSwipe (if you move swipe element on Mobile or Tablet just a little bit during shorter than longSwipe time, it will swipe to next element) in milliseconds (1s = 1000ms)
+
 ## HTML Elements
 
 - each HTML element must have its own .sass file. Names of styles must be unique in each .sass file. For example: 'ElementHtml01.js' component styles, described in 'ElementHtml01.sass' file, has '.element-html-01-container' class. So in another ElementHtml02.sass file (for ElementHtml02.js component) similar class should have another name, for example '.element-html-02-container'.
