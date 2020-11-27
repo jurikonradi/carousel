@@ -38,7 +38,7 @@ They control:
 
 ## HTML Elements
 
-- each HTML element must have its own .sass file. Names of styles must be unique in each .sass file.
+- each HTML element must have its own .sass file. Names of styles must be unique in each .sass file (for whole App).
 
 - For example: `ElementHtml01.js` component is styled in `ElementHtml01.sass` file and has **.element-html-01-container'**. class. So in another `ElementHtml02.sass` file (for `ElementHtml02.js` component) similar class must have another name, for example **.element-html-02-container**.
 - avoid using 'body', 'h1' - 'h5', 'button' styling tags, as they will overwrite your app's styles. Instead use **'className='body-html-element-01'** and **'.body-html-element-01'**.
