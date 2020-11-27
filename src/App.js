@@ -10,7 +10,6 @@ function App() {
   return (
     <div>
       <Carousel />
-      {/* <SwipeList /> */}
     </div>
   );
 }
