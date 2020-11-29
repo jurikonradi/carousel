@@ -15,8 +15,8 @@
 
 ## Advantages:
 
-- Supports multiple slides on the screen
-- Supports infinite option
+- Supports multiple slides on the screen _(not implemented)_
+- Supports infinite option _(not implemented)_
 - Supports scrolling to a selected slide (like go to slide X)
 - Any optimizations related to performance are welcome and appreciated!
 
@@ -26,7 +26,21 @@
 - Using environment setup automatizers (like create-react-app) is prohibited.
 - Submitting any code that is not written by you
 
+---
+
 # How it works
+
+On Mobile/Tablet you can swipe using 2 ways:
+
+- fast swipe, short distance
+- long swipe, long distance: till 1/2 of carousel's width
+
+On Desktop :
+
+- use arrows to move left/right
+- press 'dots' navigation on the bottom
+
+---
 
 ## Settings
 
